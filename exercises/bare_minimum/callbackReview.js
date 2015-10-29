@@ -36,9 +36,14 @@ var request = require('request');
 // This function should retrieve the first line of the file at `filePath`
 // HINT: Passing 'utf8' as the second argument to fs.readFile will give you a stringified file
 // HINT: You can get an array of lines by splitting on the '\n' character
-var pluckFirstLineFromFile = function (filePath
-) {
-  // YOUR CODE HERE
+var pluckFirstLineFromFile = function (filePath, callback) {
+  fs.readFile(filePath, 'utf8', function (err, content) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, content.split('\n')[0]);
+    }
+  });
 };
 
 // This function should retrieve the status code of a GET request to `url`
