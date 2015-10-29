@@ -58,5 +58,5 @@ var searchCommonTagsFromGitHubProfiles = function(githubHandles) {
 
 // Export these functions so we can unit test them
 module.exports = {
-  searchCommonTagsFromGitHubProfiles
+  searchCommonTagsFromGitHubProfiles: searchCommonTagsFromGitHubProfiles
 };
