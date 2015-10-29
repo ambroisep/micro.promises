@@ -25,7 +25,22 @@ var Promise = require('bluebird');
  */
 
 var promisify = function (nodeStyleFn) {
- // TODO
+ return function() {
+  var callback = arguments.last();
+  arguments = arguments.slice(0, - 1);
+  return new Promise(function(resolve, reject) {
+    var callbackDefinition = function(err, results) {
+      if (err) {
+        reject(callback(err, null));
+      } else {
+        resolve(callback(null, results))
+      }
+    };
+    arguments.push(callbackDefinition)
+    nodeStyleFn.apply(this, arguments);
+  })
+ }
+ 
 };
 
 /******************************************************************
