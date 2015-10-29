@@ -58,7 +58,23 @@ var promisify = function (nodeStyleFn) {
  */
 
 var all = function (arrayOfPromises) {
-  // TODO
+  return new Promise(function(resolve, reject) {
+    var resultArray = [];
+    var counter = 0;
+    arrayOfPromises.forEach(function(promise, i) {
+      promise
+        .then(function(result) {
+          resultArray[i] = result;
+          counter++;
+          if (counter === arrayOfPromises.length) {
+            resolve(resultArray);
+          }
+        })
+        .catch(function(err) {
+          reject(err);
+        })
+    });
+  });
 };
 
 
